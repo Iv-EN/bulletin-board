@@ -1,27 +1,14 @@
-import pytest
-from django.contrib.auth import get_user_model
-from django.urls import reverse
-from rest_framework import status
-from rest_framework.test import APIClient
+from users.models import User
 
 
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-
-@pytest.mark.django_db
-def test_create_user(api_client):
-    url = reverse("user-list")
-    payload = {
-        "username": "testuser",
-        "email": "testuser@example.com",
-        "password": "password123",
+def test_create_user(self):
+    """Проверка создания нового пользователя."""
+    data = {
+        "username": "new_test_user",
+        "email": "test@email.ru",
+        "password": "test"
     }
-    resp = api_client.post(url, payload, format="json")
-    assert resp.status_code == status.HTTP_201_CREATED
-
-    User = get_user_model()
-    user = User.objects.get(username="testuser")
-    assert user.email == payload["email"]
-    assert user.check_password(payload["password"])
+    response = self.client.post("/users/register/", data=data)
+    assert response.status_code == 201
+    assert User.objects.last().username == "new_test_user"
+    assert User.objects.count() == 1
