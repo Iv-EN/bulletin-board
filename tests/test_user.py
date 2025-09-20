@@ -6,7 +6,8 @@ def test_create_user(self):
     data = {
         "username": "new_test_user",
         "email": "test@email.ru",
-        "password": "test"
+        "password": "test",
+        "phone": "9999999999"
     }
     response = self.client.post("/users/register/", data=data)
     assert response.status_code == 201
