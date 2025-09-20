@@ -9,7 +9,7 @@ def test_create_user(self):
         "password": "test",
         "phone": "9999999999"
     }
-    response = self.client.post("/users/register/", data=data)
+    response = self.client.post("/users/", data=data)
     assert response.status_code == 201
     assert User.objects.last().username == "new_test_user"
     assert User.objects.count() == 1
