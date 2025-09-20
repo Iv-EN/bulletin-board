@@ -1,4 +1,3 @@
-import stripe
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
@@ -15,9 +14,12 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
-from .serialiser import (MyTokenObtainPairSerializer,
-                         ResetPasswordConfirmSerializer,
-                         ResetPasswordSerializer, UserSerializer)
+from .serialiser import (
+    MyTokenObtainPairSerializer,
+    ResetPasswordConfirmSerializer,
+    ResetPasswordSerializer,
+    UserSerializer,
+)
 
 
 class UserViewSet(ModelViewSet):
@@ -65,7 +67,7 @@ class ResetPasswordAPIViews(APIView):
                 else:
                     reset_link = f"/reset_password_confirm/{uid}/{token}"
                 subject = "Reset your password"
-                message = f"Что бы сбросить пароль, перейдите по ссылке: {reset_link}"
+                message = f"Ссылка для сброса пароля: {reset_link}"
                 send_mail(
                     subject,
                     message,
@@ -75,7 +77,11 @@ class ResetPasswordAPIViews(APIView):
                 )
             return Response(
                 {
-                    "detail": "Если пользователь с таким адресом электронной почты существует, на указанный адрес придёт ссылка для сброса пароля."
+                    "detail": """
+                    Если пользователь с таким адресом электронной почты
+                    существует, на указанный адрес придёт ссылка
+                    для сброса пароля.
+                    """
                 },
                 status=status.HTTP_200_OK,
             )
