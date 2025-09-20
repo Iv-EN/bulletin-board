@@ -2,6 +2,7 @@ from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
 from ads.models import Advertisement, Review
+
 from .models import User
 
 
@@ -15,12 +16,12 @@ class BaseTestCase(APITestCase):
             username="test_user", email="test@test.ru", password="test"
         )
         self.ad = Advertisement.objects.create(
-            title="test_ad", description="test description", author=self.user,
-            price=10
+            title="test_ad",
+            description="test description",
+            author=self.user,
+            price=10,
         )
-        self.review = Review.objects.create(
-            text="test_text"
-        )
+        self.review = Review.objects.create(text="test_text")
         self.client.force_authenticate(user=self.user)
 
 

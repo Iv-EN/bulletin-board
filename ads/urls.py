@@ -14,5 +14,5 @@ ads_router.register(r"reviews", ReviewViewSet, basename="ad-reviews")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("", include(ads_router.urls))
+    path("", include(ads_router.urls)),
 ]

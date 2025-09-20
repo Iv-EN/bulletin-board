@@ -6,7 +6,12 @@ from .models import Advertisement, Review
 @admin.register(Advertisement)
 class AdvertisementAdmin(admin.ModelAdmin):
     list_filter = (
-        "id", "title", "price", "description", "author", "created_at"
+        "id",
+        "title",
+        "price",
+        "description",
+        "author",
+        "created_at",
     )
 
 
