@@ -1,4 +1,4 @@
-from .settings import *  # noga:F403
+from .settings import *  # noga:F403, F405
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASES = {
