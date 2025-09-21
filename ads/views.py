@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
 
@@ -21,7 +21,8 @@ class AdsViewsSet(ModelViewSet):
     )
     serializer_class = AdvertisementSerializer
     permission_classes = [AdsPermissions]
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    search_fields = ["title"]
     pagination_class = AdsPaginator
     ordering_fields = ["-created_at", "price"]
 
