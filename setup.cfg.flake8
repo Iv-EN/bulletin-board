@@ -1,0 +1,2 @@
+[flake8]
+exclude = config/settings_test.py
