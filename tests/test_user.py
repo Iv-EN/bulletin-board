@@ -1,5 +1,6 @@
-from .base_test_case import BaseTestCase
 from users.models import User
+
+from .base_test_case import BaseTestCase
 
 
 class TestUser(BaseTestCase):

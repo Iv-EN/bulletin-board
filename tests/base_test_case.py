@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 
-from users.models import User
 from ads.models import Advertisement
+from users.models import User
 
 
 class BaseTestCase(APITestCase):
@@ -19,7 +19,7 @@ class BaseTestCase(APITestCase):
             "username": "test_user",
             "email": "test_email",
             "password": "test",
-            "phone": "123456789"
+            "phone": "123456789",
         }
         default_data.update(kwargs)
         return User.objects.create(**default_data)
@@ -58,4 +58,3 @@ class BaseTestCase(APITestCase):
         }
         default_data.update(kwargs)
         return default_data
-

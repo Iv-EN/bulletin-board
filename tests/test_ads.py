@@ -1,4 +1,5 @@
 import json
+
 from ads.models import Advertisement, Review
 from tests.base_test_case import BaseTestCase
 
@@ -12,9 +13,7 @@ class TestAdvertisement(BaseTestCase):
 
     def test_str_advertisement(self):
         """Проверка метода __str__ модели Advertisement."""
-        expected_str = (
-            f"{self.advertisement.title}"
-        )
+        expected_str = f"{self.advertisement.title}"
         assert str(self.advertisement) == expected_str
 
     def test_create_advertisement(self):
@@ -42,7 +41,7 @@ class TestAdvertisement(BaseTestCase):
         data = {
             "title": "Изменённое название",
             "price": 25,
-            "description": "Изменённое описание"
+            "description": "Изменённое описание",
         }
         ads_put = Advertisement.objects.order_by("-id").first()
         ads_id = ads_put.id
@@ -51,13 +50,11 @@ class TestAdvertisement(BaseTestCase):
         assert response.status_code == 200
         assert ads_put.title == "Изменённое название"
         assert ads_put.price == 25
-        assert ads_put. description == "Изменённое описание"
+        assert ads_put.description == "Изменённое описание"
 
     def test_patch_advertisement(self):
         """Проверка частичного изменения объявления."""
-        data = {
-            "title": "Другое название"
-        }
+        data = {"title": "Другое название"}
         ads_path = Advertisement.objects.order_by("-id").first()
         ads_id = ads_path.id
         response = self.client.patch(f"/ads/{ads_id}/", data)
@@ -76,6 +73,7 @@ class TestAdvertisement(BaseTestCase):
 
 class TestReview(BaseTestCase):
     """Тестирование модели отзывов на объявление."""
+
     def setUp(self):
         super().setUp()
         self.advertisement = self.create_advertisement(title="Товар")
@@ -98,7 +96,9 @@ class TestReview(BaseTestCase):
         ads_id = ads_review.id
         response_post = self.client.post(f"/ads/{ads_id}/reviews/", data)
         review = Review.objects.order_by("-id").first()
-        response_patch = self.client.patch(f"/ads/{ads_id}/reviews/{review.id}/", data_path)
+        response_patch = self.client.patch(
+            f"/ads/{ads_id}/reviews/{review.id}/", data_path
+        )
         review.refresh_from_db()
         assert response_patch.status_code == 200
         assert review.text == "Изменённый отзыв"
@@ -110,5 +110,7 @@ class TestReview(BaseTestCase):
         ads_id = ads_review.id
         response = self.client.post(f"/ads/{ads_id}/reviews/", data)
         review = Review.objects.order_by("-id").first()
-        response_del = self.client.delete(f"/ads/{ads_id}/reviews/{review.id}/")
+        response_del = self.client.delete(
+            f"/ads/{ads_id}/reviews/{review.id}/"
+        )
         assert response_del.status_code == 204
