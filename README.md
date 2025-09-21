@@ -61,29 +61,10 @@ Docker
 git clone https://github.com/Iv-EN/bulletin-board.git
 ```
 
-2. Создайте и активируйте виртуальное пространство:
-
-```bash
-python3 -m venv venv
-```
-
-```bash
-sourse venv/bin/activate
-```
-
-3. Обновите pip и установите зависимости:
-
-```bash
-python3 -m pip install --upgrade pip
-```
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Запуск проекта
 
 Для запуска проекта:
+Убедитесь, что Docker запущен
 
 1. Из корневой папки проекта выполните:
     ```bash
