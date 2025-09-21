@@ -2,4 +2,5 @@
 line-length = 79
 
 [tool.flake8]
-  exclude = "config/settings_test.py"
+exclude = "config/settings_test.py"
+per-file-ignores = "config/settings_test.py: F401, F403, F405"
