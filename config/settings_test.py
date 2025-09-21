@@ -1,6 +1,5 @@
 import os
-# noqa: F401, F403, F405
-from .settings import *
+from .settings import *  # noqa: F401, F403, F405
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASES = {
